@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>Orders App!</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+    <script src="/javascripts/angularApp.js"></script>
+  </head>
+  <body ng-app="ordersApp" ng-controller="ordersControl">
+  <form ng-submit="getOrdersByCompany()">
+          <input type="text" ng-model="company"></input>
+          <button type="submit">Orders by Company</button>
+  </form>
+  <form ng-submit="getOrdersByAddress()">
+          <input type="text" ng-model="address"></input>
+          <button type="submit">Orders by Address</button>
+  </form>
+  <form ng-submit="deleteByOrderID()">
+          <input type="text" ng-model="orderId"></input>
+          <button type="submit">Delete Order (give OrderID)</button>
+  </form>
+  <form ng-submit="showByItemCount()">
+          <button type="submit">Show Items by Order Count</button>
+  </form>
+  <table class="order">
+          <tr>
+                  <th>orderId</th>
+                  <th>companyName</th>
+                  <th>customerAddress</th>
+                  <th>orderedItem</th>
+          </tr>
+          <tr ng-repeat="order in showOrders | orderBy: 'orderedItem'">
+                  <th>{{order.orderId}}</th>
+                  <th>{{order.companyName}}</th>
+                  <th>{{order.customerAddress}}</th>
+                  <th>{{order.orderedItem}}</th>
+          </tr>
+  </table>
+  <table class="item">
+          <tr>
+                  <th>orderedItem</th>
+                  <th>itemCount</th>
+          </tr>
+          <tr ng-repeat="item in showItems | orderBy: '-itemCount'">
+                  <th>{{item.orderedItem}}</th>
+                  <th>{{item.itemCount}}</th>
+          </tr>
+  </table>
+  </body>
+</html>
+
